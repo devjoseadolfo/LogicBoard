@@ -5,6 +5,7 @@ struct BoardView: View {
     var body: some View {
         ZStack{
             CanvasContainerView()
+                .ignoresSafeArea()
                 .animation(.easeInOut(duration: 0.2), value: envi.board.selectedCircuit)
             CircuitView(circuit: envi.selectedCircuit)
         }

@@ -6,7 +6,6 @@ extension CanvasScene {
         let touchLocation = recognizer.location(in: self.view)
         let location = CGPoint(x: cameraOffset.x + ((touchLocation.x - (frame.width / 2)) * previousCameraScale),
                                y: cameraOffset.y + (((frame.height / 2) - touchLocation.y) * previousCameraScale))
-        print(location)
         if state == .add {
             let nodes = self.nodes(at: location)
             let imageNodes = nodes

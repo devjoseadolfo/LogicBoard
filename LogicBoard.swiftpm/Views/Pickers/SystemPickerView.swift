@@ -20,9 +20,6 @@ struct SystemPickerView: View {
                     .buttonStyle(SystemButtonStyle(isChosen: circuit.state  == .file))
                     .keyboardShortcut("s", modifiers: .command)
                     
-                    Spacer()
-                        .frame(height: 40)
-                    
                     Button {
                         circuit.state = .add
                     } label: {
@@ -47,10 +44,6 @@ struct SystemPickerView: View {
                     }
                     .keyboardShortcut("w", modifiers: .command)
                     .buttonStyle(SystemButtonStyle(isChosen: circuit.state == .wire))
-                    
-                    
-                    Spacer()
-                        .frame(height: 40)
                     
                     Button {
                         circuit.state = .simulate

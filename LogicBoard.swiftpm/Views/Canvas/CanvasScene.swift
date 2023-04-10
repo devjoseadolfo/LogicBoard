@@ -83,7 +83,7 @@ public class CanvasScene: SKScene, ObservableObject, UIGestureRecognizerDelegate
     var tempLinePointCount: Int = 0
     var tempStartPin: SKSpriteNode?
     var newPointCreated: Bool = false
-    
+
     var previousCameraScale: CGFloat = 1.5
     
     let oneFingerTapRecognizer = UITapGestureRecognizer()

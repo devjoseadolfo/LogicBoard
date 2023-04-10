@@ -1,9 +1,8 @@
-import Foundation
 public struct LogicBoard {
     public var mainCircuit: Circuit
     public var circuits: [Circuit] = [Circuit]()
     public var selectedCircuit: Circuit
-    public var state: ViewState = .file {
+    public var state: BoardState = .file {
         didSet {
             circuits.forEach { circuit in
                 circuit.state = state

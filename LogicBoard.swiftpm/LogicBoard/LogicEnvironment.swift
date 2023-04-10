@@ -1,6 +1,4 @@
 import SwiftUI
-import SpriteKit
-import Combine
 
 class LogicEnvironment: ObservableObject {
     @Published var board: LogicBoard

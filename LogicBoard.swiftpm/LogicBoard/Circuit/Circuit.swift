@@ -10,7 +10,7 @@ public class Circuit: Nameable, Identifiable, Equatable, ObservableObject {
     public var id: String
     public var isExample: Bool = false
     
-    public var state: ViewState = .add {
+    public var state: BoardState = .add {
         didSet {
             canvasScene.state = state
             if state == .simulate {
@@ -73,7 +73,7 @@ public class Circuit: Nameable, Identifiable, Equatable, ObservableObject {
         return lhs.id == rhs.id
     }
     
-    public func changeState(to state: ViewState) {
+    public func changeState(to state: BoardState) {
         self.state = state
     }
 }

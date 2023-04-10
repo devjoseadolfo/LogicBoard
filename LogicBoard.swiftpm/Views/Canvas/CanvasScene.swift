@@ -11,7 +11,7 @@ public class CanvasScene: SKScene, ObservableObject, UIGestureRecognizerDelegate
     var cameraPoint = CGPoint.zero
     var cameraOffset = CGPoint.zero
     
-    var state: ViewState = .add {
+    var state: BoardState = .add {
         didSet {
             touchedDeviceNode = nil
             touchedWireNode = nil

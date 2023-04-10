@@ -107,7 +107,6 @@ public class CanvasScene: SKScene, ObservableObject, UIGestureRecognizerDelegate
         view.addGestureRecognizer(oneFingerPanRecognizer)
         
         pencilPanRecognizer.canvasScene = self
-        pencilPanRecognizer.canvasView = view
         pencilPanRecognizer.allowedTouchTypes = [2]
         pencilPanRecognizer.minimumNumberOfTouches = 1
         pencilPanRecognizer.maximumNumberOfTouches = 1

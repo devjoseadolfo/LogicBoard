@@ -6,7 +6,7 @@ public struct ActionControlView: View {
     @ObservedObject var circuit: Circuit
     @State var showInfo: Bool = false
     let wireHelp: String = "To draw a wire, drag from one pin to another pin. To make a turn in the wire, pause momentarily while dragging or, if using an Apple Pencil, press hard on the screen."
-    let addHelp: String = "To add a device, drag your chosen device from the right panel and drop it to the desire location on the circuit. Apple Pencil cannot be used to move a device."
+    let addHelp: String = "To add a device, drag your chosen device from the right panel and drop it to the desire location on the circuit."
     
     @State var importing = false
     @State var exporting = false

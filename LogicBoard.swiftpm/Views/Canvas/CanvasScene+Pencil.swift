@@ -2,7 +2,8 @@ import SpriteKit
 
 class CanvasPanGestureRecognizer: UIPanGestureRecognizer {
     var canvasScene: CanvasScene?
-    var canvasView: SKView?
+    var dragLocationStart: CGPoint?
+    var originalDraggedNodeLocation: CGPoint?
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         guard let canvasScene = canvasScene,
@@ -12,7 +13,7 @@ class CanvasPanGestureRecognizer: UIPanGestureRecognizer {
         let location = CGPoint(x: canvasScene.cameraOffset.x + ((touchLocation.x - (canvasScene.frame.width / 2)) * canvasScene.previousCameraScale),
                                y: canvasScene.cameraOffset.y + (((canvasScene.frame.height / 2) - touchLocation.y) * canvasScene.previousCameraScale))
         if canvasScene.state == .wire {
-            
+            canvasScene.touchedWireNode = nil
             let nodes = canvasScene.nodes(at: location)
             let pinNode = nodes
                 .first { $0.name?.contains("PIN") ?? false } as? SKSpriteNode
@@ -38,6 +39,31 @@ class CanvasPanGestureRecognizer: UIPanGestureRecognizer {
             canvasScene.tempLineLocations.append(pinLocation)
             canvasScene.tempLinePointCount = 1
         }
+        if canvasScene.state == .add {
+            let nodes = canvasScene.nodes(at: location)
+            let imageNodes = nodes
+                .filter {  $0.name?.contains("MAIN") ?? false }
+                .map { $0 as? SKSpriteNode }
+            
+            for imageNode in imageNodes {
+                guard let imageNode = imageNode,
+                      let node = imageNode.parent as? SKSpriteNode,
+                      let image = imageNode.texture?.cgImage() else { continue }
+                
+                var nodeTouchedLocation = scene.convert(location, to: imageNode)
+                nodeTouchedLocation = CGPoint(x: (nodeTouchedLocation.x + imageNode.size.width/2) * 4,
+                                              y: (nodeTouchedLocation.y + imageNode.size.height/2) * 4)
+                
+                guard let color = image.getPixelColor(point: nodeTouchedLocation),
+                      color.alpha > 0.01 else { continue }
+                
+                canvasScene.draggedDeviceNode = node
+                canvasScene.draggedNodePosition = node.position
+                originalDraggedNodeLocation = node.position
+                dragLocationStart = location
+                return
+            }
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
@@ -50,6 +76,7 @@ class CanvasPanGestureRecognizer: UIPanGestureRecognizer {
                                y: canvasScene.cameraOffset.y + (((canvasScene.frame.height / 2) - touchLocation.y) * canvasScene.previousCameraScale))
         if canvasScene.state == .wire {
             guard let tempLine = canvasScene.tempLine else { return }
+            print(translation(in: canvasScene.view!))
             let path = CGMutablePath()
             
             for i in 0..<canvasScene.tempLinePointCount {
@@ -73,6 +100,33 @@ class CanvasPanGestureRecognizer: UIPanGestureRecognizer {
             } else {
                 if canvasScene.newPointCreated {
                     canvasScene.newPointCreated = false
+                }
+            }
+        }
+        if canvasScene.state == .add {
+            guard let draggedNode = canvasScene.draggedDeviceNode,
+                  let dragLocationStart = dragLocationStart,
+                  let originalDraggedNodeLocation = originalDraggedNodeLocation else { return }
+            let translation = CGPoint(x: location.x - dragLocationStart.x, 
+                                      y: location.y - dragLocationStart.y)
+            draggedNode.position = CGPoint(x: originalDraggedNodeLocation.x + translation.x, 
+                                           y: originalDraggedNodeLocation.y + translation.y)
+            
+            guard let parent = draggedNode.parentDevice else { return }
+            let parentLocation = draggedNode.position
+            for incoming in parent.incomingConnections.values {
+                guard let incoming = incoming else { continue }
+                let pinLocation = parent.pinNodes[incoming.end.terminal].position
+                let endLocation = CGPoint(x: parentLocation.x + pinLocation.x,
+                                          y: parentLocation.y + pinLocation.y)
+                incoming.updateEndPoint(to: endLocation)
+            }
+            for connections in parent.outcomingConnections.values {
+                for connection in connections {
+                    let pinLocation = parent.pinNodes[parent.inputCount + connection.start.terminal].position
+                    let endLocation = CGPoint(x: parentLocation.x + pinLocation.x,
+                                              y: parentLocation.y + pinLocation.y)
+                    connection.updateStartPoint(to: endLocation)
                 }
             }
         }
@@ -152,7 +206,11 @@ class CanvasPanGestureRecognizer: UIPanGestureRecognizer {
             canvasScene.tempLine = nil
             canvasScene.tempLineLocations = []
             canvasScene.tempLinePointCount = 0
-            
+        }
+        
+        if canvasScene.state == .add {
+            canvasScene.draggedDeviceNode = nil
+            canvasScene.draggedNodePosition = nil
         }
     }
 }

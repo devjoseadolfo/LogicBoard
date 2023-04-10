@@ -11,7 +11,7 @@ extension CanvasScene {
                 let nodes = self.nodes(at: location)
                 let pinNode = nodes
                     .first { $0.name?.contains("PIN") ?? false } as? SKSpriteNode
-                    
+                touchedWireNode = nil
                 guard let pinNode = pinNode,
                       let parentNode = pinNode.parent,
                       !pinNode.isOccupied() else { return }
@@ -166,8 +166,8 @@ extension CanvasScene {
                       let draggedNodePosition = draggedNodePosition else { return }
                 let translation = recognizer.translation(in: self.view)
                 let newPosition = CGPoint(
-                  x: draggedNodePosition.x + translation.x,
-                  y: draggedNodePosition.y + translation.y * -1
+                  x: draggedNodePosition.x + translation.x * previousCameraScale,
+                  y: draggedNodePosition.y + translation.y * -previousCameraScale
                 )
                 draggedNode.position = newPosition
                 

@@ -154,7 +154,7 @@ extension CanvasScene {
                                                   y: (nodeTouchedLocation.y + imageNode.size.height/2) * 4)
                     
                     guard let color = image.getPixelColor(point: nodeTouchedLocation),
-                          color.cgColor.alpha > 0.01 else { continue }
+                          color.alpha > 0.01 else { continue }
                     
                     draggedDeviceNode = node
                     draggedNodePosition = node.position

@@ -22,7 +22,7 @@ extension CanvasScene {
                                               y: (nodeTouchedLocation.y + imageNode.size.height/2) * 4)
                 
                 guard let color = image.getPixelColor(point: nodeTouchedLocation),
-                      color.cgColor.alpha > 0.01 else { continue }
+                      color.alpha > 0.01 else { continue }
                 
                 touchedDeviceNode = touchedDeviceNode == node ? nil : node
                 return
@@ -45,7 +45,7 @@ extension CanvasScene {
             
                
                 guard let color = image.getPixelColor(point: pixelPosition),
-                      color.cgColor.alpha > 0.05 else { continue }
+                      color.alpha > 0.05 else { continue }
                 
                 touchedWireNode = touchedWireNode == wireNode ? nil : wireNode
                 

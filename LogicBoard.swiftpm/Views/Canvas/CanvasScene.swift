@@ -84,7 +84,7 @@ public class CanvasScene: SKScene, ObservableObject, UIGestureRecognizerDelegate
     var tempStartPin: SKSpriteNode?
     var newPointCreated: Bool = false
     
-    var previousCameraScale: CGFloat = 1
+    var previousCameraScale: CGFloat = 1.5
     
     let oneFingerTapRecognizer = UITapGestureRecognizer()
     let pencilPanRecognizer = CanvasPanGestureRecognizer()
@@ -131,6 +131,7 @@ public class CanvasScene: SKScene, ObservableObject, UIGestureRecognizerDelegate
             camera.position = CGPoint(x: 0, y: 0)
             cameraPoint = camera.position
             originalCameraPoint = camera.position
+            camera.setScale(1.5)
             inited = true
         } else {
             camera.position = cameraPoint

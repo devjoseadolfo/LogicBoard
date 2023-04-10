@@ -76,9 +76,7 @@ public struct ActionControlView: View {
                             .labelStyle(ActionLabelStyle())
                     }
                     .buttonStyle(ActionButtonStyle())
-                    .popover(isPresented: $showInfo) {
-                        Spacer()
-                            .frame(height:20)
+                    .alwaysPopover(isPresented: $showInfo, content: {
                         Text(circuit.state == .wire ? wireHelp : addHelp)
                             .frame(maxWidth: 300)
                             .fixedSize(horizontal: false, vertical: true)
@@ -86,9 +84,7 @@ public struct ActionControlView: View {
                             .font(.system(size: 13, weight: .regular, design: .default))
                             .multilineTextAlignment(.leading)
                             .padding(20)
-                        Spacer()
-                            .frame(height:20)
-                    }
+                    })
                 }
             }
             

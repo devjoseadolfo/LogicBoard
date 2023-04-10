@@ -53,7 +53,7 @@ extension CanvasScene {
                 let velocityMagnitude: CGFloat = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
                 let lastLocation = tempLineLocations.last
                 let distance = sqrt(pow(location.x - lastLocation!.x, 2) + pow(location.y - lastLocation!.y, 2))
-                if velocityMagnitude < 10, distance > 32 {
+                if velocityMagnitude < (10 * previousCameraScale), distance > (32 * previousCameraScale) {
                     if !newPointCreated {
                         tempLineLocations.append(location)
                         newPointCreated = true

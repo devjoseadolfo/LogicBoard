@@ -38,6 +38,6 @@ public struct CanvasContainerView: View {
                             .opacity(envi.selectedCircuit == circuit ? 1 : 0)
                 }
             }
-            .background(Color(uiColor: UIColor.lightGray))
+            .background(Color(uiColor: UIColor.canvasBackground))
     }
 }

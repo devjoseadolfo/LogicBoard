@@ -38,7 +38,7 @@ public class Circuit: Nameable, Identifiable, Equatable, ObservableObject {
         canvasScene.name = id
         canvasScene.parentCircuit = self
         canvasScene.scaleMode = .resizeFill
-        canvasScene.backgroundColor = UIColor.lightGray
+        canvasScene.backgroundColor = UIColor.canvasBackground
     }
     
     deinit {

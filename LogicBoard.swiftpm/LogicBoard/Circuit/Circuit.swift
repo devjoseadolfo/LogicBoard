@@ -6,14 +6,14 @@ public class Circuit: Nameable, Identifiable, Equatable, ObservableObject {
     public var connections: [Connection] = [Connection]()
     
     public static var count = 0
-    public var name: String
+    public var name: String 
     public var id: String
     public var isExample: Bool = false
     
     public var state: BoardState = .add {
         didSet {
             canvasScene.state = state
-            if state == .simulate {
+            if state == .simulate { 
                 initialSolve()
                 devices.forEach { $0.updateWire() }
                 connections.forEach { $0.updateColor() }

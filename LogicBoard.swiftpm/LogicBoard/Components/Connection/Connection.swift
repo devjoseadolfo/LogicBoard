@@ -1,6 +1,6 @@
 import SpriteKit
 
-public class Connection: Identifiable, Equatable, Component {
+public class Connection: Identifiable, Equatable {
     var start: DevicePin
     var end: DevicePin
     

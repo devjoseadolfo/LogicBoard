@@ -1,6 +1,6 @@
 import SpriteKit
 
-public protocol Device: Identifiable, Component {
+public protocol Device: Identifiable {
     var parentCircuit: Circuit? { get set }
     
     var inputs: [Bool] { get set }

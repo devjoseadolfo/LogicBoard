@@ -1,6 +1,6 @@
 import SpriteKit
 
-public class PushButton: Input, Nameable {
+public class PushButton: Input {
     public var parentCircuit: Circuit?
     
     public var deviceName: String = "PUSHBUTTON"
@@ -21,8 +21,7 @@ public class PushButton: Input, Nameable {
     public var outcomingConnections: [Int: [Connection]] = [0: []]
     
     public static var count = 0
-    public var id: String 
-    var name: String
+    public var id: String
     
     public var visited: Bool = false
     public var level: Int?
@@ -32,21 +31,9 @@ public class PushButton: Input, Nameable {
     public var wireNodes: [SKShapeNode] = [SKShapeNode]()
     public var pinNodes: [SKSpriteNode] = [SKSpriteNode]()
     
-    public init(name: String) {
-        Self.count += 1
-        id = "IN" + String(Self.count)
-        self.name = name
-        
-        imageNode = SKSpriteNode(imageNamed: imageName + ".png")
-        imageNode.size = CGSize(width: 128, height: 128)
-    
-        spriteNode.addChild(imageNode)
-    }
-    
     public init() {
         Self.count += 1
         id = "IN" + String(Self.count)
-        self.name = id
         
         let wireNode = SKShapeNode()
         let wirePath = CGMutablePath()

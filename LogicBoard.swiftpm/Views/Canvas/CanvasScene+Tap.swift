@@ -4,8 +4,9 @@ extension CanvasScene {
     @objc func oneFingerTap(recognizer: UITapGestureRecognizer) {
         guard let scene = scene else { return }
         let touchLocation = recognizer.location(in: self.view)
-        let location = CGPoint(x: (touchLocation.x + cameraOffset.x - (frame.width / 2)),
-                               y: ((frame.height / 2) - touchLocation.y + cameraOffset.y))
+        let location = CGPoint(x: cameraOffset.x + ((touchLocation.x - (frame.width / 2)) * previousCameraScale),
+                               y: cameraOffset.y + (((frame.height / 2) - touchLocation.y) * previousCameraScale))
+        print(location)
         if state == .add {
             let nodes = self.nodes(at: location)
             let imageNodes = nodes
@@ -20,12 +21,6 @@ extension CanvasScene {
                 nodeTouchedLocation = CGPoint(x: (nodeTouchedLocation.x + imageNode.size.width/2) * 4,
                                               y: (nodeTouchedLocation.y + imageNode.size.height/2) * 4)
                 
-                if let pinNodes = node.parentDevice?.pinNodes {
-                    pinNodes.forEach {
-                        let position = CGPoint(x: node.position.x + $0.position.x, y: node.position.y + $0.position.y)
-                        print(position)
-                    }
-                }
                 guard let color = image.getPixelColor(point: nodeTouchedLocation),
                       color.cgColor.alpha > 0.01 else { continue }
                 

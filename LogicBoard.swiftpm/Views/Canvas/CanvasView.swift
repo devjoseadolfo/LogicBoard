@@ -34,10 +34,8 @@ public struct CanvasContainerView: View {
                         .background(.thinMaterial, in: Capsule())
                 }
                 ForEach(envi.board.circuits) { circuit in
-                    //if envi.selectedCircuit == circuit {
                         CanvasView(canvasScene: circuit.canvasScene)
                             .opacity(envi.selectedCircuit == circuit ? 1 : 0)
-                    //}
                 }
             }
             .background(Color(uiColor: UIColor.lightGray))

@@ -3,7 +3,6 @@ import SpriteKit
 extension CanvasScene {
     @objc func twoFingerPan(recognizer: UIPanGestureRecognizer) {
         guard let camera = scene?.camera else {
-            print("No camera found")
               return
             }
         
@@ -13,8 +12,8 @@ extension CanvasScene {
    
         let translation = recognizer.translation(in: self.view)
         let newPosition = CGPoint(
-          x: previousCameraPoint.x + translation.x * -1,
-          y: previousCameraPoint.y + translation.y
+          x: previousCameraPoint.x + translation.x * -1 * previousCameraScale,
+          y: previousCameraPoint.y + translation.y * previousCameraScale
         )
         camera.position = newPosition
         cameraPoint = newPosition

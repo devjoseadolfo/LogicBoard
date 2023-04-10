@@ -4,8 +4,8 @@ extension CanvasScene {
     @objc func oneFingerPan(recognizer: UIPanGestureRecognizer) {
         guard let scene = scene else { return }
         let touchLocation = recognizer.location(in: self.view)
-        let location = CGPoint(x: (touchLocation.x + cameraOffset.x - (frame.width / 2)),
-                               y: ((frame.height / 2) - touchLocation.y + cameraOffset.y))
+        let location = CGPoint(x: cameraOffset.x + ((touchLocation.x - (frame.width / 2)) * previousCameraScale),
+                               y: cameraOffset.y + (((frame.height / 2) - touchLocation.y) * previousCameraScale))
         if state == .wire {
             if recognizer.state == .began {
                 let nodes = self.nodes(at: location)
@@ -53,7 +53,7 @@ extension CanvasScene {
                 let velocityMagnitude: CGFloat = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
                 let lastLocation = tempLineLocations.last
                 let distance = sqrt(pow(location.x - lastLocation!.x, 2) + pow(location.y - lastLocation!.y, 2))
-                if velocityMagnitude < 5, distance > 30 {
+                if velocityMagnitude < 10, distance > 32 {
                     if !newPointCreated {
                         tempLineLocations.append(location)
                         newPointCreated = true
@@ -83,7 +83,6 @@ extension CanvasScene {
                       startType != endType,
                       !endNode.isOccupied() else {
                     startNode.colorOccupied(false)
-                    print("ERROR")
                     tempStartPin = nil
                     line.removeFromParent()
                     tempLine = nil

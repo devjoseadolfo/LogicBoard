@@ -59,6 +59,10 @@ struct CircuitPickerUnitView: View {
                 Label("Delete", systemImage: "trash")
             }.disabled(circuit.isExample)
         })
+        .shadow(color: Color(red: 0.0, green: 0.4, blue: 1.0).opacity(envi.selectedCircuit == circuit ? 0.3 : 0),
+                radius: 10,
+                x: 5,
+                y: -5)
         .shadow(color: .black.opacity(envi.selectedCircuit == circuit ? 0.5 : 0), radius: envi.selectedCircuit == circuit ? 8 : 0, x: -4, y: 4)
         .alert("Rename Circuit", isPresented: $showRename, actions: {
             TextField(circuit.name, text: $newName)

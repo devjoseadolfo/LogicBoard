@@ -82,6 +82,5 @@ public class Display: Output, Nameable {
     
     public func run() {
         imageNode.texture = inputs[0] ? .onDisplayTexture : .offDisplayTexture
-        //print("\(name), \(state)")
     }
 }

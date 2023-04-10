@@ -1,7 +1,5 @@
 import SwiftUI
 
-// TODO: Add the device picker.
-
 public struct DevicePickerView: View {
     var deviceNames: [DeviceName] = [.PUSHBUTTON, .DISPLAY, .AND, .NAND, .OR, .NOR, .XOR, .XNOR, .NOT, .BUFFER]
     
@@ -43,16 +41,8 @@ struct DeviceView: View {
             Image(deviceName.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 120, maxHeight: 120)
+                .frame(maxWidth: 100, maxHeight: 100)
         }
         .hoverEffect(.lift)
-    }
-}
-
-struct DevicePickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        DevicePickerView()
-            .previewInterfaceOrientation(.landscapeLeft)
-            .environmentObject(LogicEnvironment())
     }
 }

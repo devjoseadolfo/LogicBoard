@@ -61,7 +61,6 @@ extension Circuit {
             
             guard let devices = arrangedDevices[key] else { continue }
             for device in devices {
-                //print("\(key), \(device.id)")
                 device.run()
                 device.updateWire()
                 for (_, connections) in device.outcomingConnections {

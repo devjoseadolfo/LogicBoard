@@ -9,8 +9,8 @@ class CanvasPanGestureRecognizer: UIPanGestureRecognizer {
               let scene = canvasScene.scene,
               let touch = touches.first else { return }
         let touchLocation = touch.location(in: canvasScene.view)
-        let location = CGPoint(x: (touchLocation.x + canvasScene.cameraOffset.x - (canvasScene.frame.width / 2)),
-                               y: ((canvasScene.frame.height / 2) - touchLocation.y + canvasScene.cameraOffset.y))
+        let location = CGPoint(x: canvasScene.cameraOffset.x + ((touchLocation.x - (canvasScene.frame.width / 2)) * canvasScene.previousCameraScale),
+                               y: canvasScene.cameraOffset.y + (((canvasScene.frame.height / 2) - touchLocation.y) * canvasScene.previousCameraScale))
         if canvasScene.state == .wire {
             
             let nodes = canvasScene.nodes(at: location)
@@ -46,8 +46,8 @@ class CanvasPanGestureRecognizer: UIPanGestureRecognizer {
               let touch = touches.first else { return }
         
         let touchLocation = touch.location(in: canvasScene.view)
-        let location = CGPoint(x: (touchLocation.x + canvasScene.cameraOffset.x - (canvasScene.frame.width / 2)),
-                               y: ((canvasScene.frame.height / 2) - touchLocation.y + canvasScene.cameraOffset.y))
+        let location = CGPoint(x: canvasScene.cameraOffset.x + ((touchLocation.x - (canvasScene.frame.width / 2)) * canvasScene.previousCameraScale),
+                               y: canvasScene.cameraOffset.y + (((canvasScene.frame.height / 2) - touchLocation.y) * canvasScene.previousCameraScale))
         if canvasScene.state == .wire {
             guard let tempLine = canvasScene.tempLine else { return }
             let path = CGMutablePath()
@@ -87,8 +87,8 @@ class CanvasPanGestureRecognizer: UIPanGestureRecognizer {
                   let startNode = canvasScene.tempStartPin,
                   let circuit = canvasScene.parentCircuit else { return }
             let touchLocation = touch.location(in: canvasScene.view)
-            let location = CGPoint(x: (touchLocation.x + canvasScene.cameraOffset.x - (canvasScene.frame.width / 2)),
-                                   y: ((canvasScene.frame.height / 2) - touchLocation.y + canvasScene.cameraOffset.y))
+            let location = CGPoint(x: canvasScene.cameraOffset.x + ((touchLocation.x - (canvasScene.frame.width / 2)) * canvasScene.previousCameraScale),
+                                   y: canvasScene.cameraOffset.y + (((canvasScene.frame.height / 2) - touchLocation.y) * canvasScene.previousCameraScale))
 
             let nodes = canvasScene.nodes(at: location)
             let endNode = nodes
@@ -102,7 +102,6 @@ class CanvasPanGestureRecognizer: UIPanGestureRecognizer {
                   startType != endType,
                   !endNode.isOccupied() else {
                 startNode.colorOccupied(false)
-                print("ERROR")
                 canvasScene.tempStartPin = nil
                 line.removeFromParent()
                 canvasScene.tempLine = nil

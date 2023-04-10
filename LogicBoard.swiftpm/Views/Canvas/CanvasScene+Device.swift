@@ -5,8 +5,8 @@ extension CanvasScene {
         let deviceNode = device.spriteNode
         
         guard let scene = scene else { return }
-        deviceNode.position = CGPoint(x: (position.x + cameraOffset.x - (frame.width / 2)),
-                                      y: ((frame.height / 2) - position.y + cameraOffset.y))
+        deviceNode.position = CGPoint(x: cameraOffset.x + ((position.x - (frame.width / 2)) * previousCameraScale),
+                                      y: cameraOffset.y + (((frame.height / 2) - position.y) * previousCameraScale))
         
         scene.addChild(deviceNode)
     }

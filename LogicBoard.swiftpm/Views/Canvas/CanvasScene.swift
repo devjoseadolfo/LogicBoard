@@ -88,7 +88,7 @@ public class CanvasScene: SKScene, ObservableObject, UIGestureRecognizerDelegate
     
     let oneFingerTapRecognizer = UITapGestureRecognizer()
     let oneFingerPanRecognizer = UIPanGestureRecognizer()
-    let pencilPanRecognizer = CanvasPanGestureRecognizer()
+    let pencilPanRecognizer = PencilPanGestureRecognizer()
     let twoFingerPanRecognizer = UIPanGestureRecognizer()
     let twoFingerPinchRecognizer = UIPinchGestureRecognizer()
     
@@ -107,7 +107,6 @@ public class CanvasScene: SKScene, ObservableObject, UIGestureRecognizerDelegate
         oneFingerPanRecognizer.minimumNumberOfTouches = 1
         oneFingerPanRecognizer.maximumNumberOfTouches = 1
         view.addGestureRecognizer(oneFingerPanRecognizer)
-        
         
         pencilPanRecognizer.canvasScene = self
         pencilPanRecognizer.delegate = self

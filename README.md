@@ -1,6 +1,6 @@
 # LogicBoard
 
-![LogicBoard Banner](https://github.com/devjoseadolfo/LogicBoard/blob/315043a33716302be5ab9bbecae563734a3e4811/Banner.jpg)
+![LogicBoard Banner](https://github.com/devjoseadolfo/LogicBoard/blob/ab39a8a65ac80308e5b634f710e3cceebf828a12/Banner.jpg)
 
 ## Introduction
 

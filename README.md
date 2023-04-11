@@ -14,6 +14,6 @@ Hello, welcome to Jose Adolfo Talactac's submission for WWDC23 Swift Student 
 - All assets that aren’t attributed to another party are made by the creator of this Playground App, Jose Adolfo Talactac, including app icon, Playground thumbnail, and the app image assets.
 
 ## Screenshots
-
-![Screenshot1](https://github.com/devjoseadolfo/LogicBoard/blob/cc5ca04a5eab4421c7c650dd2b0c1505c8039dc8/Screenshots/Screenshot1.png)
-![Screenshot2](https://github.com/devjoseadolfo/LogicBoard/blob/cc5ca04a5eab4421c7c650dd2b0c1505c8039dc8/Screenshots/Screenshot2.png)
+| Device Selection | Wire Creation | Simulation |
+| ---------------- | ---------------- | ---------------- |
+| ![Screenshot1](https://github.com/devjoseadolfo/LogicBoard/blob/cc5ca04a5eab4421c7c650dd2b0c1505c8039dc8/Screenshots/Screenshot1.png) | ![Screenshot2](https://github.com/devjoseadolfo/LogicBoard/blob/d153f219af1a24a44cae3e283138c9c2684898cb/Screenshots/Screenshot2.gif) | ![Screenshot3](https://github.com/devjoseadolfo/LogicBoard/blob/d153f219af1a24a44cae3e283138c9c2684898cb/Screenshots/Screenshot3.png) |

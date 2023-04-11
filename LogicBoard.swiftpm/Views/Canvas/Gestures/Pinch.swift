@@ -1,7 +1,7 @@
 import SpriteKit
 
 extension CanvasScene {
-    @objc func twoFingerPinch(recognizer: UIPinchGestureRecognizer) {
+    @objc func pinch(recognizer: UIPinchGestureRecognizer) {
         guard let camera = self.camera else {
             return
         }

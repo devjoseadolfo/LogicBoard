@@ -1,7 +1,7 @@
 import SpriteKit
 
 extension CanvasScene {
-    @objc func oneFingerTap(recognizer: UITapGestureRecognizer) {
+    @objc func tap(recognizer: UITapGestureRecognizer) {
         guard let scene = scene else { return }
         let touchLocation = recognizer.location(in: self.view)
         let location = CGPoint(x: cameraOffset.x + ((touchLocation.x - (frame.width / 2)) * previousCameraScale),
@@ -63,5 +63,9 @@ extension CanvasScene {
                   let circuit = parentCircuit else { return }
             circuit.toggleAndSolve(button)
         }
+    }
+    
+    func changeTouchedDeviceNode(to node: SKSpriteNode?) {
+        touchedDeviceNode = node
     }
 }

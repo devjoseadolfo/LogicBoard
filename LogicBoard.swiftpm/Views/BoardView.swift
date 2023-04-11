@@ -8,7 +8,7 @@ struct BoardView: View {
                 .ignoresSafeArea()
                 .animation(.easeInOut(duration: 0.2), value: envi.board.selectedCircuit)
             CircuitView(circuit: envi.selectedCircuit)
-        }
+        }.ignoresSafeArea(.keyboard)
     }
 }
 

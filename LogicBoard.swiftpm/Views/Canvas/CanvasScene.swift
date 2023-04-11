@@ -87,6 +87,7 @@ public class CanvasScene: SKScene, ObservableObject, UIGestureRecognizerDelegate
     var previousCameraScale: CGFloat = 1.5
     
     let oneFingerTapRecognizer = UITapGestureRecognizer()
+    let oneFingerPanRecognizer = UIPanGestureRecognizer()
     let pencilPanRecognizer = CanvasPanGestureRecognizer()
     let twoFingerPanRecognizer = UIPanGestureRecognizer()
     let twoFingerPinchRecognizer = UIPinchGestureRecognizer()
@@ -94,24 +95,28 @@ public class CanvasScene: SKScene, ObservableObject, UIGestureRecognizerDelegate
     public override func didMove(to view: SKView) {
         guard let scene = scene else { return }
         
-        
-        oneFingerTapRecognizer.addTarget(self, action: #selector(oneFingerTap))
-        
+        oneFingerTapRecognizer.addTarget(self, action: #selector(tap))
+        oneFingerTapRecognizer.delegate = self
+        oneFingerTapRecognizer.allowedTouchTypes = [0,2,3]
+        oneFingerTapRecognizer.numberOfTouchesRequired = 1
         view.addGestureRecognizer(oneFingerTapRecognizer)
         
-        let oneFingerPanRecognizer = UIPanGestureRecognizer()
         oneFingerPanRecognizer.addTarget(self, action: #selector(oneFingerPan))
+        oneFingerPanRecognizer.delegate = self
         oneFingerPanRecognizer.allowedTouchTypes = [0,3]
         oneFingerPanRecognizer.minimumNumberOfTouches = 1
         oneFingerPanRecognizer.maximumNumberOfTouches = 1
         view.addGestureRecognizer(oneFingerPanRecognizer)
         
+        
         pencilPanRecognizer.canvasScene = self
+        pencilPanRecognizer.delegate = self
         pencilPanRecognizer.allowedTouchTypes = [2]
         pencilPanRecognizer.minimumNumberOfTouches = 1
         pencilPanRecognizer.maximumNumberOfTouches = 1
+        pencilPanRecognizer.delaysTouchesBegan = true
         view.addGestureRecognizer(pencilPanRecognizer)
-        
+             
         twoFingerPanRecognizer.addTarget(self, action: #selector(twoFingerPan))
         twoFingerPanRecognizer.allowedScrollTypesMask = .continuous
         twoFingerPanRecognizer.minimumNumberOfTouches = 2
@@ -119,9 +124,8 @@ public class CanvasScene: SKScene, ObservableObject, UIGestureRecognizerDelegate
         twoFingerPanRecognizer.delegate = self
         view.addGestureRecognizer(twoFingerPanRecognizer)
         
-        
-        twoFingerPinchRecognizer.addTarget(self, action: #selector(twoFingerPinch))
-        twoFingerPanRecognizer.delegate = self
+        twoFingerPinchRecognizer.addTarget(self, action: #selector(pinch))
+        twoFingerPinchRecognizer.delegate = self
         view.addGestureRecognizer(twoFingerPinchRecognizer)
         
         let camera = SKCameraNode()

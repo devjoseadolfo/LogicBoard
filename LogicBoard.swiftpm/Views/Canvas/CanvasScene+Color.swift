@@ -17,3 +17,26 @@ extension CGImage {
         return CGColor(red: r, green: g, blue: b, alpha: a)
     }
 }
+
+func lerp(a : CGFloat, b : CGFloat, fraction : CGFloat) -> CGFloat
+{
+    return (b-a) * fraction + a
+}
+
+// Custom color transition for SKShapeNode derived from solution by OwlOCR and Patrick Collin
+// https://stackoverflow.com/questions/20872556/skshapenode-animate-color-change
+
+struct ColorComponents {
+    var red = CGFloat.zero
+    var green = CGFloat.zero
+    var blue = CGFloat.zero
+    var alpha = CGFloat.zero
+}
+
+extension UIColor {
+    func toComponents() -> ColorComponents {
+        var components = ColorComponents()
+        getRed(&components.red, green: &components.green, blue: &components.blue, alpha: &components.alpha)
+        return components
+    }
+}

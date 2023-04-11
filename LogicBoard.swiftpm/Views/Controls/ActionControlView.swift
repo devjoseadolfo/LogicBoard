@@ -70,13 +70,14 @@ public struct ActionControlView: View {
                     .buttonStyle(ActionButtonStyle())
                 } else {
                     Button {
-                        showInfo = true
+                        showInfo = !showInfo
                     } label: {
                         Label("Help", systemImage: "questionmark.circle")
                             .labelStyle(ActionLabelStyle())
                     }
                     .buttonStyle(ActionButtonStyle())
-                    .alwaysPopover(isPresented: $showInfo, content: {
+                    .popover(present: $showInfo)
+                    {
                         Text(circuit.state == .wire ? wireHelp : addHelp)
                             .frame(maxWidth: 300)
                             .fixedSize(horizontal: false, vertical: true)
@@ -84,7 +85,9 @@ public struct ActionControlView: View {
                             .font(.system(size: 13, weight: .regular, design: .default))
                             .multilineTextAlignment(.leading)
                             .padding(20)
-                    })
+                            .background(.thinMaterial , in: RoundedRectangle(cornerRadius: 12))
+                            .padding(.top, 20)
+                    }
                 }
             }
             

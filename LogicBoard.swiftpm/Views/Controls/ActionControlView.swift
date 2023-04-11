@@ -55,6 +55,8 @@ public struct ActionControlView: View {
                         .frame(height: 20)
                     Button {
                         circuit.remove(device)
+                        circuit.selectedDevice = nil
+                        circuit.canvasScene.touchedDeviceNode = nil
                     } label: {
                         Label("Delete", systemImage: "trash")
                             .labelStyle(ActionLabelStyle())
@@ -63,6 +65,8 @@ public struct ActionControlView: View {
                 } else if let connection = circuit.selectedConnection {
                     Button {
                         circuit.remove(connection)
+                        circuit.selectedConnection = nil
+                        circuit.canvasScene.touchedWireNode = nil
                     } label: {
                         Label("Delete", systemImage: "trash")
                             .labelStyle(ActionLabelStyle())

@@ -74,19 +74,7 @@ struct PopoverModifier: ViewModifier {
                 .onValueChange(of: present) { oldValue, newValue in
 
                     /// Make sure there is a window first.
-                    var window: UIWindow! = readWindow
-                    if window == nil {
-                        print("[Popovers] - No window was found when presenting popover, falling back to key window. Please file a bug report (https://github.com/aheze/Popovers/issues).")
-
-                        if let keyWindow = UIApplication.shared.windows.first(where: \.isKeyWindow) {
-                            window = keyWindow
-                        } else {
-                            print("[Popovers] - Key window was not found either, skipping popover presentation.")
-                            self.present = false
-                            self.popover = nil /// Remove the reference to the popover.
-                            return
-                        }
-                    }
+                    let window: UIWindow! = readWindow
 
                     /// `newValue` is true, so present the popover.
                     if newValue {
@@ -217,19 +205,7 @@ struct MultiPopoverModifier: ViewModifier {
                 .onValueChange(of: selection) { oldSelection, newSelection in
 
                     /// Make sure there is a window first.
-                    var window: UIWindow! = readWindow
-                    if window == nil {
-                        print("[Popovers] - No window was found when presenting popover, falling back to key window. Please file a bug report (https://github.com/aheze/Popovers/issues).")
-
-                        if let keyWindow = UIApplication.shared.windows.first(where: \.isKeyWindow) {
-                            window = keyWindow
-                        } else {
-                            print("[Popovers] - Key window was not found either, skipping popover presentation.")
-                            self.selection = nil
-                            self.popover = nil /// Remove the reference to the popover.
-                            return
-                        }
-                    }
+                    let window: UIWindow! = readWindow
 
                     let model = window.popoverModel
 

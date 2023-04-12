@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 class LogicEnvironment: ObservableObject {
     @Published var board: LogicBoard
     @Published var showDock: Bool = true

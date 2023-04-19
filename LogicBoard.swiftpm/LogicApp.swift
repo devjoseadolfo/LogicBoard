@@ -2,11 +2,11 @@ import SwiftUI
 
 @main
 struct MyApp: App {
-    @StateObject var environment = LogicEnvironment()
+    let envi = LogicEnvironment()
     var body: some Scene {
         WindowGroup {
             BoardView()
-                .environmentObject(environment)
+                .environmentObject(envi)
         }
     }
 }
